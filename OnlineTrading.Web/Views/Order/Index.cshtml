@@ -1,0 +1,40 @@
+﻿@using OnlineTrading.Web.Models.Order
+@model List<UserOrderViewModel>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<h1>My Orders</h1>
+
+<a asp-controller="Order" asp-action="Create" class="btn btn-primary mt-3 mb-3">
+    Create New Order
+</a>
+
+
+@if (!Model.Any())
+{
+    <p>You have not placed any orders yet.</p>
+}
+else
+{
+    foreach (var order in Model)
+    {
+        <div class="order-container" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px;">
+            <h3>Order #@order.OrderId</h3>
+            <p><strong>Creator:</strong> @order.CreatorName</p>
+            <p><strong>Shop:</strong> @order.ShopName</p>
+            <p><strong>Bank:</strong> @order.BankName</p>
+            <p><strong>Date:</strong> @order.OrderDate.ToString("yyyy-MM-dd")</p>
+            <p><strong>Delivery Service:</strong> @order.DeliveryServiceName</p>
+            <p><strong>Total Cost:</strong> @order.TotalCost.ToString("C")</p>
+            <a asp-controller="Order"
+               asp-action="Details"
+               asp-route-id="@order.OrderId"
+               class="btn btn-outline-secondary me-2">
+                Details
+            </a>
+        </div>
+    }
+}
+

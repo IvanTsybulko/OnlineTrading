@@ -1,0 +1,25 @@
+﻿@using OnlineTrading.Web.Models.Order
+@model OrderUpdateViewModel
+@{
+    ViewData["Title"] = "Update Order";
+}
+
+<h2>Update Order #@Model.OrderId</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="OrderId" />
+
+    <div class="mb-3">
+        <label asp-for="DeliveryServiceId" class="form-label"></label>
+        <select asp-for="DeliveryServiceId" class="form-select" asp-items="Model.DeliveryServices"></select>
+        <span asp-validation-for="DeliveryServiceId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success me-2">Save Changes</button>
+    <a asp-action="ModeratorIndex" asp-route-id="@Model.OrderId" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
